@@ -40,3 +40,6 @@ vignettes/*.pdf
 
 # raw data
 data/raw/*
+
+# scrap code
+src/scrap.R
