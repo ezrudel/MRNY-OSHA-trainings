@@ -8,13 +8,11 @@ library(dplyr)
 library(ggplot2)
 
 # create graphs comparing pre- and post-test data
-vs.pre_post = function(){
+vs.pre_post = function(df){
   setwd("output")
   
   # calculate individual scores of pre/post-tests
   scores = df %>%
-    filter(test == 1 | test == 19) %>%
-    replace(is.na(.), 0) %>%
     transmute(start_date = start_date,
               test = as.factor(test),
               Nombre = Nombre,

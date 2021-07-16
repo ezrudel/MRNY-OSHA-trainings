@@ -7,13 +7,11 @@ library(dplyr)
 library(ggplot2)
 
 # create graph comparing unit tests
-by.test = function(){
+by.test = function(df){
   setwd("output")
   
   # calculate individual scores for unit tests
   scores = df[1:8] %>%
-    filter(test > 1 & test < 18) %>%
-    replace(is.na(.), 0) %>%
     transmute(start_date = start_date,
               test = as.factor(test),
               Nombre = Nombre,
@@ -49,7 +47,7 @@ by.test = function(){
 }
 
 # create graphs comparing questions on each unit test
-by.question = function(){
+by.question = function(df){
   setwd("output")
   
   # iterate thru each test

@@ -47,6 +47,6 @@ clean.test = function(df,tr,te){
 }
 
 clean.survey = function(df,tr){
-  # to be implemented
+  df = df[, -c(1:2)]
   return(blank)
 }
