@@ -27,29 +27,41 @@ setwd("../..")
 # training key
 t.key = dirs %>% str_sub(3,12) %>%
   as.Date(format = "%Y_%m_%d") %>% format("%b %d")
-t.key = factor(t.key, t.key)
+t.key = factor(t.key, levels = t.key)
+
+# test data
+tblank = data.frame(matrix(nrow = 0, ncol = 13))
+colnames(tblank) = c("start_date","test","Nombre",
+                    "X1","X2","X3","X4","X5",
+                    "X6","X7","X8","X9","X10")
+tblank$Nombre = character()
+tblank$start_date = factor()
+tdata = data.frame(tblank)
+
+# survey data
+sblank = data.frame(matrix(nrow = 0, ncol = 10))
+colnames(sblank) = c("training","Instructor",
+                     "X1","X2","X3","X4","X5",
+                     "X6","X7","X8")
+sdata = data.frame(sblank)
 
 run = function(){
   # load data into df
   source("src/load.R")
-  df = load.data()
+  load.data()
   
-  # View(df)
+  View(tdata)
   # View(bad_data)
   
   source("src/survey.R")
-  surveys = df %>% filter(test == 18)
   # analyze survey data
   
   source("src/pre_post.R")
-  pre_post = df %>% filter(test == 1 | test == 19)
-  vs.pre_post(pre_post)
+  vs.pre_post()
   
   source("src/unit.R")
-  unit_tests = df %>% filter(test > 1,
-                             test < 18)
-  by.question(unit_tests)
-  by.test(unit_tests)
+  by.question()
+  by.test()
   
 }
 run()

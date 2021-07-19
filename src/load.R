@@ -6,12 +6,6 @@ library(dplyr)
 library(stringr)
 
 load.data = function(){
-  # initialize dataframe
-  df = data.frame(matrix(nrow = 0, ncol = 13))
-  colnames(df) = c("training","test","Nombre",
-                   "X1","X2","X3","X4","X5",
-                   "X6","X7","X8","X9","X10")
-  df$Nombre = character()
   source("src/clean.R")
   setwd("data/raw")
   for(i in 1:length(dirs)){
@@ -43,17 +37,20 @@ load.data = function(){
       # check for bad data and add to df
       if(nrow(temp) == 0){
         bad_data <<- bad_data %>% rbind(c(dirs[i], n))
-      } else {
-        df = df %>% bind_rows(temp)
+      } else if(n == 18){ # survey
+        # sdata <<- sdata %>% bind_rows(temp)
+      } else { # test
+        tdata <<- tdata %>% bind_rows(temp)
       }
     }
   }
   
-  # add date column
-  df = df %>% mutate(start_date = t.key[training]) %>%
-    select(-training)
-  df = df[c(13,1:12)]
+  # # add date column
+  # tdata = tdata %>%
+  #   mutate(start_date = t.key[training]) %>%
+  #   select(-training)
+  # tdata = tdata[c(13,1:12)]
   
   setwd("../..")
-  return(df)
+  return(tdata)
 }

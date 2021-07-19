@@ -1,28 +1,35 @@
-# cleans the output from Google Forms into a dataframe with
-# the names of all participants, which training they took,
-# and which questions they got right
+# cleans the output from Google Forms into a dataframe
+# with the names of all participants, which training
+# they took, and which questions they got right
 
 #load packages
 library(dplyr)
 library(stringr)
 
-blank = data.frame(matrix(nrow = 0, ncol = 13))
-colnames(blank) = c("training","test","Nombre",
-                    "X1","X2","X3","X4","X5",
-                    "X6","X7","X8","X9","X10")
-blank$Nombre = character()
-
 clean.test = function(df,tr,te){
-  #rename "Nombre" column
-  nameCol = df %>% select(contains("Nombre")) %>%
-    colnames() %>% getElement(1)
-  df = df %>% rename(Nombre = nameCol)
-  #select name and score columns
-  df = df %>% select(Nombre
-                     | (starts_with("X")
-                        & ends_with("Score.")))
-  #simplify column names
-  colnames(df) = sub("X(\\d*).*","X\\1",colnames(df))
+  # check for bad data
+  if(nrow(df) == 0){
+    return(tblank)
+  }
+  # select columns
+  df = df[,-c(1,2)]
+  df = data.frame(df[1],
+                  select(df,
+                         (ends_with("Score.") &
+                            !starts_with("Nombre") &
+                            !starts_with("Fecha") &
+                            !starts_with("Entrenador"))))
+  
+  # simplify column names
+  if(te == 1 | te == 19){ # pre-/post-test
+    colnames(df) = c("Nombre",
+                     "X1","X2","X3","X4","X5",
+                     "X6","X7","X8","X9","X10")
+  } else { # unit test
+    colnames(df) = c("Nombre",
+                     "X1","X2","X3","X4","X5")
+  }
+  
   #reformat data
   format_col = function(var){
     as.numeric(str_sub(var,1,1)) /
@@ -31,22 +38,34 @@ clean.test = function(df,tr,te){
   df = df %>% transmute(Nombre=Nombre,
                         across(starts_with("X"),
                                format_col))
+  
   #remove duplicate and blank rows
-  df = df %>% distinct(Nombre, .keep_all = TRUE)
+  df = df %>% distinct(tolower(Nombre), .keep_all = TRUE)
+  df = df %>% select(-"tolower(Nombre)")
   df = df %>% filter(df[1]!="")
   
-  #check for bad data
+  #check again for bad data
   if(nrow(df) == 0){
-    return(blank)
+    return(tblank)
   }
   
-  #add training_num column
+  #add test and date columns
   df = data.frame(test = te, df)
-  df = data.frame(training = tr, df)
+  df = data.frame(start_date = t.key[tr], df)
+  
   return(df)
 }
 
 clean.survey = function(df,tr){
   df = df[, -c(1:2)]
-  return(blank)
+  colnames(df) = c("Instructor",
+                   "X1","X2","X3","X4","X5",
+                   "X6","X7","X8")
+  
+  #check for bad data
+  if(nrow(df) == 0){
+    return(sblank)
+  }
+  
+  return(df)
 }

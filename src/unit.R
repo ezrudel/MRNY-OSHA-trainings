@@ -3,15 +3,16 @@
 # output: a graph for each unit test, showing the
 # percent of participants across all trainings that
 # got each question right
+
 library(dplyr)
 library(ggplot2)
 
 # create graph comparing unit tests
-by.test = function(df){
+by.test = function(){
   setwd("output")
   
   # calculate individual scores for unit tests
-  scores = df[1:8] %>%
+  scores = tdata[1:8] %>%
     transmute(start_date = start_date,
               test = as.factor(test),
               Nombre = Nombre,
@@ -47,12 +48,12 @@ by.test = function(df){
 }
 
 # create graphs comparing questions on each unit test
-by.question = function(df){
+by.question = function(){
   setwd("output")
   
   # iterate thru each test
   for(t in 2:17){
-    current = df[1:8] %>% filter(test == t) %>% #t
+    current = tdata[1:8] %>% filter(test == t) %>% #t
       select(-start_date, -test, -Nombre) %>%
       t() %>% as.data.frame()
     c.key = q.key %>% filter(Test == t) #t
