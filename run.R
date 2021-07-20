@@ -40,9 +40,13 @@ tdata = data.frame(tblank)
 
 # survey data
 sblank = data.frame(matrix(nrow = 0, ncol = 10))
-colnames(sblank) = c("training","Instructor",
+colnames(sblank) = c("start_date","Instructor",
                      "X1","X2","X3","X4","X5",
                      "X6","X7","X8")
+for(c in c("start_date","Instructor",
+           "X1","X3","X5")){
+  sblank$c = factor()
+}
 sdata = data.frame(sblank)
 
 run = function(){

@@ -38,7 +38,7 @@ load.data = function(){
       if(nrow(temp) == 0){
         bad_data <<- bad_data %>% rbind(c(dirs[i], n))
       } else if(n == 18){ # survey
-        # sdata <<- sdata %>% bind_rows(temp)
+        sdata <<- sdata %>% bind_rows(temp)
       } else { # test
         tdata <<- tdata %>% bind_rows(temp)
       }

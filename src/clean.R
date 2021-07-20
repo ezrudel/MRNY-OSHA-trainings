@@ -57,15 +57,23 @@ clean.test = function(df,tr,te){
 }
 
 clean.survey = function(df,tr){
-  df = df[, -c(1:2)]
-  colnames(df) = c("Instructor",
-                   "X1","X2","X3","X4","X5",
-                   "X6","X7","X8")
-  
   #check for bad data
   if(nrow(df) == 0){
     return(sblank)
   }
+  
+  # select and rename columns
+  df = df[, -c(1:2)]
+  colnames(df) = c("Instructor",
+                   "X1","X2","X3","X4","X5",
+                   "X6","X7","X8")
+  df$Instructor = as.factor(df$Instructor)
+  df$X1 = as.factor(df$X1)
+  df$X3 = as.factor(df$X3)
+  df$X5 = as.factor(df$X5)
+  
+  # add date column
+  df = data.frame(start_date = t.key[tr], df)
   
   return(df)
 }
