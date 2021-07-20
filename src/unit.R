@@ -13,6 +13,7 @@ by.test = function(){
   
   # calculate individual scores for unit tests
   scores = tdata[1:8] %>%
+    filter(test > 1 & test < 17) %>%
     transmute(start_date = start_date,
               test = as.factor(test),
               Nombre = Nombre,
@@ -56,11 +57,12 @@ by.question = function(){
     current = tdata[1:8] %>% filter(test == t) %>% #t
       select(-start_date, -test, -Nombre) %>%
       t() %>% as.data.frame()
-    c.key = q.key %>% filter(Test == t) #t
+    c.key = q.key[1:7] %>% filter(Test == t) #t
     ctopic = c.key[1,2]
     qnames = c.key %>% select(-Test, -Topic) %>%
       as.character() %>% str_wrap(width = 22,
                                   indent = 3)
+    # print(qnames)
     qnames = factor(qnames, qnames)
     
     # calculate % correct for each ?

@@ -13,6 +13,7 @@ vs.pre_post = function(){
   
   # calculate individual scores of pre/post-tests
   scores = tdata %>%
+    filter(test == 1 | test == 19) %>%
     transmute(start_date = start_date,
               test = as.factor(test),
               Nombre = Nombre,

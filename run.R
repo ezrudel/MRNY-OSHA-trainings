@@ -50,7 +50,7 @@ run = function(){
   source("src/load.R")
   load.data()
   
-  View(tdata)
+  # View(tdata)
   # View(bad_data)
   
   source("src/survey.R")
