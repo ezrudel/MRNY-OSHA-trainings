@@ -67,10 +67,33 @@ clean.survey = function(df,tr){
   colnames(df) = c("Instructor",
                    "X1","X2","X3","X4","X5",
                    "X6","X7","X8")
+  
+  # reformat factor columns
   df$Instructor = as.factor(df$Instructor)
-  df$X1 = as.factor(df$X1)
-  df$X3 = as.factor(df$X3)
-  df$X5 = as.factor(df$X5)
+  df$X1 = factor(df$X1, levels = c("Bajo",
+                                   "Suficiente",
+                                   "Satisfactorio",
+                                   "Muy Bueno",
+                                   "Exelente"))
+  df$X3 = factor(df$X3, levels = c("Bajo",
+                                   "Suficiente",
+                                   "Satisfactorio",
+                                   "Muy Bueno",
+                                   "Excelente"))
+  interpret.X5 = function(x){
+    if(grepl("algunos", x)){
+      return("Algunos")
+    } else if(grepl("la gran parte", x)){
+      return("Muchos")
+    } else if(grepl("todos", x)){
+      return("Todos")
+    } else {
+      return("Ningunos")
+    }
+  }
+  df$X5 = df$X5 %>% as.character()
+  df$X5 = df$X5 %>% lapply(interpret.X5) %>% unlist()
+  df$X5 = df$X5 %>% as.factor()
   
   # add date column
   df = data.frame(start_date = t.key[tr], df)

@@ -43,10 +43,16 @@ sblank = data.frame(matrix(nrow = 0, ncol = 10))
 colnames(sblank) = c("start_date","Instructor",
                      "X1","X2","X3","X4","X5",
                      "X6","X7","X8")
-for(c in c("start_date","Instructor",
-           "X1","X3","X5")){
-  sblank$c = factor()
-}
+sblank$start_date = factor()
+sblank$Instructor = factor()
+sblank$X1 = factor()
+sblank$X2 = character()
+sblank$X3 = factor()
+sblank$X4 = character()
+sblank$X5 = factor()
+sblank$X6 = character()
+sblank$X7 = character()
+sblank$X8 = character()
 sdata = data.frame(sblank)
 
 run = function(){
@@ -58,7 +64,7 @@ run = function(){
   # View(bad_data)
   
   source("src/survey.R")
-  # analyze survey data
+  by.instructor()
   
   source("src/pre_post.R")
   vs.pre_post()

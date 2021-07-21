@@ -26,3 +26,15 @@ df[,6] =
              "Aplicaré algunos conocimientos",
              "Aplicaré la gran parte de los conocimientos",
              "Aplicaré todos los conocimientos"))
+
+
+x = x %>% str_split(" ") %>% getElement(1)
+x = x[-1]
+x = x[-length(x)]
+if(length(x) > 1){
+  x = x[-length(x)]
+}
+if(length(x) > 1){
+  x = x[-length(x)]
+}
+return(x)
