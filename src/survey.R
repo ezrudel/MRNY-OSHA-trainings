@@ -15,23 +15,35 @@ by.instructor = function(){
     summarise(avg = mean(as.numeric(X1)))
   
   # make bar graph
-  bar = ggplot(means,
+  barn = ggplot(means,
                aes(x=Instructor,y=avg)) +
     geom_col(fill = 10) +
+    theme(text = element_text(size = 17),
+          axis.text.x = element_text(angle = 50,
+                                     hjust = 1)) +
     labs(title = "Overall Ratings by Instructor",
          subtitle = paste("from OSHA trainings",
                           t.key[1], "-",
                           t.key[length(t.key)])) +
     xlab("Instructor") +
-    theme(text = element_text(size = 17),
-          axis.text.x = element_text(angle = 50,
-                                     hjust = 1)) +
     scale_y_continuous(name = "Average Overall Rating",
                        breaks = c(1:5),
                        labels = levels(sdata$X1),
                        limits = c(0,5))
-  bar
-  ggsave("instructor-ratings.png")
+  barn
+  ggsave("ENG/instructor-ratings.png")
   
+  bars = barn +
+    labs(title = "Calificacio´n general por instructor",
+         subtitle = paste("de entrenamientos de OSHA",
+                          t.key[1], "-",
+                          t.key[length(t.key)])) +
+    xlab("Instructor") +
+    scale_y_continuous(name = "Calificacio´n general promedio",
+                       breaks = c(1:5),
+                       labels = levels(sdata$X1),
+                       limits = c(0,5))
+  bars
+  ggsave("ESP/calificacion-instructor.png")
   setwd("..")
 }
