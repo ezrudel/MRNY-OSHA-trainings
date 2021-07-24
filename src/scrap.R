@@ -38,3 +38,18 @@ if(length(x) > 1){
   x = x[-length(x)]
 }
 return(x)
+
+
+bars = barn +
+  labs(title = "Calificación general por instructor",
+       subtitle = paste("de entrenamientos de OSHA",
+                        t.key[1], "-",
+                        t.key[length(t.key)])) +
+  xlab("Instructor") +
+  scale_y_continuous(name = "Calificación general promedio",
+                     breaks = c(1:5),
+                     labels = levels(sdata$X1),
+                     limits = c(0,5))
+bars
+ggsave("ESP/calificacion-instructor.png")
+setwd("..")
