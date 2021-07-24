@@ -31,29 +31,21 @@ vs.pre_post = function(){
     summarise(avg = mean(score))
 
   # make bar graph
-  barn = ggplot(means,
+  bar = ggplot(means,
                aes(x=start_date,y=avg,fill=test)) +
     geom_col(position = "dodge") +
-    theme(text = element_text(size = 17),
-          axis.text.x = element_text(angle = 45,
-                                     hjust = 1)) +
-    ylim(0,10) +
     labs(title = "Pre- and Post-Test Results",
          subtitle = "from 2020-2021 OSHA trainings") +
     xlab("Training Start Date") +
-    ylab("Average Score Out of 10")
-  barn
-  ggsave("ENG/pre-post-avg.png")
-  bars = barn +
-    labs(title = "Resultados de pre- y post-evaluaciones",
-         subtitle = "de entrenamientos de OSHA 2020-2021") +
-    xlab("Fecha de inicio del entrenamiento") +
-    ylab("Puntaje promedio de 10")
-  bars
-  ggsave("ESP/pre-post-promedio.png")
+    theme(text = element_text(size = 17),
+          axis.text.x = element_text(angle = 45,
+                                     hjust = 1)) +
+    ylab("Average Score Out of 10") + ylim(0,10)
+  bar
+  ggsave("pre-post-avg.png")
   
   # make box plots
-  boxn = ggplot(scores, aes(x=start_date, y=score,
+  box = ggplot(scores, aes(x=start_date, y=score,
                            fill=test)) +
     geom_boxplot(outlier.size = 1.5) +
     stat_summary(fun = mean, geom = "point",
@@ -61,24 +53,15 @@ vs.pre_post = function(){
                  size = 3,
                  position = position_dodge(
                    width = 0.75)) +
-    theme(text = element_text(size = 17),
-          axis.text.x = element_text(angle = 45,
-                                     hjust = 1)) +
-    ylim(0,10) +
     labs(title = "Pre- and Post-Test Results",
          subtitle = "from 2020-2021 OSHA trainings") +
     xlab("Training Start Date") +
-    ylab("Score Out of 10")
-  boxn
-  ggsave("ENG/pre-post-distribution.png")
-  
-  boxs = boxn +
-    labs(title = "Resultados de pre- y post-evaluaciones",
-         subtitle = "de entrenamientos de OSHA 2020-2021") +
-    xlab("Fecha de inicio del entrenamiento") +
-    ylab("Puntaje de 10")
-  boxs
-  ggsave("ESP/pre-post-distribucion.png")
+    theme(text = element_text(size = 17),
+          axis.text.x = element_text(angle = 45,
+                                     hjust = 1)) +
+    ylab("Score Out of 10") + ylim(0,10)
+  box
+  ggsave("pre-post-dist.png")
   
   setwd("..")
 }

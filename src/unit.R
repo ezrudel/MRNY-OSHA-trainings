@@ -30,31 +30,20 @@ by.test = function(){
     summarise(avg = mean(score))
 
   # make bar graph
-  barn = ggplot(means,
+  bar = ggplot(means,
                aes(x=topic,y=avg)) +
     geom_col(fill = 10) +
-    theme(text = element_text(size = 17),
-          axis.text.x = element_text(angle = 50,
-                                     hjust = 1)) +
-    ylim(0,5) +
     labs(title = "Unit Test Results",
          subtitle = paste("from OSHA trainings",
                           t.key[1], "-",
                           t.key[length(t.key)])) +
     xlab("Topic") +
-    ylab("Average Score Out of 5")
-  barn
-  ggsave("ENG/unit-test-avg.png")
-  
-  bars = barn +
-    labs(title = "Resultados de evaluaciones de la unidad",
-         subtitle = paste("de entrenamientos de OSHA",
-                          t.key[1], "-",
-                          t.key[length(t.key)])) +
-    xlab("Tema") +
-    ylab("Puntaje promedio de 5")
-  bars
-  ggsave("ESP/unidad-promedio.png")
+    theme(text = element_text(size = 17),
+          axis.text.x = element_text(angle = 50,
+                                     hjust = 1)) +
+    ylab("Average Score Out of 5") + ylim(0,5)
+  bar
+  ggsave("unit-avg.png")
 
   setwd("..")
 }
@@ -73,6 +62,7 @@ by.question = function(){
     qnames = c.key %>% select(-Test, -Topic) %>%
       as.character() %>% str_wrap(width = 22,
                                   indent = 3)
+    # print(qnames)
     qnames = factor(qnames, qnames)
     
     # calculate % correct for each ?
@@ -82,35 +72,23 @@ by.question = function(){
                 question = qnames)
 
     # make graph
-    barn = ggplot(current, aes(x = question,
+    bar = ggplot(current, aes(x = question,
                               y = correct)) +
       geom_col(fill = 10) +
-      theme(text = element_text(size = 17),
-            axis.text.x = element_text(angle = 40,
-                                       hjust = 1,
-                                       size = 14)) +
-      ylim(0,100) +
       labs(title = "Unit Test Results by Question",
            subtitle = paste("Topic:", ctopic,
                             "   Date Range:",
                             t.key[1], "-",
                             t.key[length(t.key)])) +
       xlab("Question") +
-      ylab("Percent with Correct Answer")
-    fname = paste("ENG/unit-test", t, ctopic, ".png")
-    barn
-    ggsave(fname)
-    
-    bars = barn +
-      labs(title = "Evaluaciones de la unidad por pregunta",
-           subtitle = paste("Tema:", ctopic,
-                            "   Fechas:",
-                            t.key[1], "-",
-                            t.key[length(t.key)])) +
-      xlab("Pregunta") +
-      ylab("Porcentaje con la respuesta correcta")
-    fname = paste("ESP/preguntas-unidad", t, ctopic, ".png")
-    bars
+      theme(text = element_text(size = 17),
+            axis.text.x = element_text(angle = 40,
+                                       hjust = 1,
+                                       size = 14)) +
+      ylab("Percent with Correct Answer") +
+      ylim(0,100)
+    fname = paste("unit-test", t, ctopic, ".png")
+    bar
     ggsave(fname)
   }
   
