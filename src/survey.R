@@ -45,5 +45,6 @@ by.instructor = function(){
                        limits = c(0,5))
   bars
   ggsave("ESP/calificacion-instructor.png")
+
   setwd("..")
 }
