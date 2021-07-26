@@ -34,12 +34,12 @@ by.instructor = function(){
   ggsave("instructor-ratings.png")
   
   bars = barn +
-    labs(title = "Calificación general por instructor",
+    labs(title = "Calificacio´n general por instructor",
          subtitle = paste("de entrenamientos de OSHA",
                           t.key[1], "-",
                           t.key[length(t.key)])) +
     xlab("Instructor") +
-    scale_y_continuous(name = "Calificación general promedio",
+    scale_y_continuous(name = "Calificacio´n general promedio",
                        breaks = c(1:5),
                        labels = levels(sdata$X1),
                        limits = c(0,5))
