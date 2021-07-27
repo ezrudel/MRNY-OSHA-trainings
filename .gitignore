@@ -43,3 +43,6 @@ data/raw/*
 
 # output (for now)
 output/*
+
+# scrap code
+src/scrap.R

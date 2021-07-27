@@ -29,7 +29,8 @@ by.test = function(){
   means = scores %>% group_by(topic) %>%
     summarise(avg = mean(score))
 
-  # make bar graph
+  # make graph
+  # ENGLISH
   barn = ggplot(means,
                aes(x=topic,y=avg)) +
     geom_col(fill = 10) +
@@ -44,8 +45,10 @@ by.test = function(){
     xlab("Topic") +
     ylab("Average Score Out of 5")
   barn
-  ggsave("ENG/unit-test-avg.png")
-  
+  ggsave("ENG/unit-test-avg.png",
+         width = ggw, height = ggh,
+         units = ggu, dpi = ggres)
+  # SPANISH
   bars = barn +
     labs(title = "Resultados de evaluaciones de la unidad",
          subtitle = paste("de entrenamientos de OSHA",
@@ -54,7 +57,9 @@ by.test = function(){
     xlab("Tema") +
     ylab("Puntaje promedio de 5")
   bars
-  ggsave("ESP/unidad-promedio.png")
+  ggsave("ESP/unidad-promedio.png",
+         width = ggw, height = ggh,
+         units = ggu, dpi = ggres)
 
   setwd("..")
 }
@@ -82,6 +87,7 @@ by.question = function(){
                 question = qnames)
 
     # make graph
+    # ENGLISH
     barn = ggplot(current, aes(x = question,
                               y = correct)) +
       geom_col(fill = 10) +
@@ -99,8 +105,10 @@ by.question = function(){
       ylab("Percent with Correct Answer")
     fname = paste("ENG/unit-test", t, ctopic, ".png")
     barn
-    ggsave(fname)
-    
+    ggsave(fname,
+           width = ggw, height = ggh,
+           units = ggu, dpi = ggres)
+    # SPANISH
     bars = barn +
       labs(title = "Evaluaciones de la unidad por pregunta",
            subtitle = paste("Tema:", ctopic,
@@ -111,7 +119,9 @@ by.question = function(){
       ylab("Porcentaje con la respuesta correcta")
     fname = paste("ESP/preguntas-unidad", t, ctopic, ".png")
     bars
-    ggsave(fname)
+    ggsave(fname,
+           width = ggw, height = ggh,
+           units = ggu, dpi = ggres)
   }
   
   setwd("..")

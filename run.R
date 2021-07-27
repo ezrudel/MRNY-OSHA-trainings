@@ -55,21 +55,25 @@ sblank$X7 = character()
 sblank$X8 = character()
 sdata = data.frame(sblank)
 
+# graph dimensions
+ggw = 7
+ggh = 7
+ggu = "in"
+ggres = 300
+
+# run code
 run = function(){
   # load data into df
-  source("src/load.R")
+  source("src/load.R", encoding = 'UTF-8')
   load.data()
   
-  # View(tdata)
-  # View(bad_data)
-  
-  source("src/survey.R")
+  source("src/survey.R", encoding = 'UTF-8')
   by.instructor()
   
-  source("src/pre_post.R")
+  source("src/pre_post.R", encoding = 'UTF-8')
   vs.pre_post()
   
-  source("src/unit.R")
+  source("src/unit.R", encoding = 'UTF-8')
   by.question()
   by.test()
   

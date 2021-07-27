@@ -6,7 +6,7 @@ library(dplyr)
 library(stringr)
 
 load.data = function(){
-  source("src/clean.R")
+  source("src/clean.R", encoding = 'UTF-8')
   setwd("data/raw")
   for(i in 1:length(dirs)){
     tests = list.dirs(path = dirs[i])
