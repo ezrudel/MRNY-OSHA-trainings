@@ -9,6 +9,8 @@ library(readr)
 library(stringr)
 library(ggplot2)
 
+source("src/util.R", encoding = "UTF-8")
+
 # set up global variables:
 # question abbreviation key
 q.key = read.csv("data/question-key.csv",

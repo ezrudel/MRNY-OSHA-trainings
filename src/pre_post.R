@@ -43,20 +43,14 @@ vs.pre_post = function(){
          subtitle = "from 2020-2021 OSHA trainings") +
     xlab("Training Start Date") +
     ylab("Average Score Out of 10")
-  barn
-  ggsave("ENG/pre-post-avg.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ENG/pre-post-avg.png", barn)
   # SPANISH
   bars = barn +
     labs(title = "Resultados de pre- y post-evaluaciones",
          subtitle = "de entrenamientos de OSHA 2020-2021") +
     xlab("Fecha de inicio del entrenamiento") +
     ylab("Puntaje promedio de 10")
-  bars
-  ggsave("ESP/pre-post-promedio.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ESP/pre-post-promedio.png", bars)
   
   # make box plots
   # ENGLISH
@@ -76,20 +70,14 @@ vs.pre_post = function(){
          subtitle = "from 2020-2021 OSHA trainings") +
     xlab("Training Start Date") +
     ylab("Score Out of 10")
-  boxn
-  ggsave("ENG/pre-post-distribution.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ENG/pre-post-distribution.png", boxn)
   #SPANISH
   boxs = boxn +
     labs(title = "Resultados de pre- y post-evaluaciones",
          subtitle = "de entrenamientos de OSHA 2020-2021") +
     xlab("Fecha de inicio del entrenamiento") +
     ylab("Puntaje de 10")
-  boxs
-  ggsave("ESP/pre-post-distribucion.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ESP/pre-post-distribucion.png", boxs)
   
   setwd("..")
 }

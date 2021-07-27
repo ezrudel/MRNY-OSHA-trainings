@@ -44,10 +44,7 @@ by.test = function(){
                           t.key[length(t.key)])) +
     xlab("Topic") +
     ylab("Average Score Out of 5")
-  barn
-  ggsave("ENG/unit-test-avg.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ENG/unit-test-avg.png", barn)
   # SPANISH
   bars = barn +
     labs(title = "Resultados de evaluaciones de la unidad",
@@ -56,10 +53,7 @@ by.test = function(){
                           t.key[length(t.key)])) +
     xlab("Tema") +
     ylab("Puntaje promedio de 5")
-  bars
-  ggsave("ESP/unidad-promedio.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ESP/unidad-promedio.png", bars)
 
   setwd("..")
 }
@@ -105,10 +99,7 @@ by.question = function(){
       xlab("Question") +
       ylab("Percent with Correct Answer")
     fname = paste("ENG/unit-test", t, ctopic, ".png")
-    barn
-    ggsave(fname,
-           width = ggw, height = ggh,
-           units = ggu, dpi = ggres)
+    save.gg(fname, barn)
     # SPANISH
     bars = barn +
       labs(title = "Evaluaciones de la unidad por pregunta",
@@ -119,10 +110,7 @@ by.question = function(){
       xlab("Pregunta") +
       ylab("Porcentaje con la respuesta correcta")
     fname = paste("ESP/preguntas-unidad", t, ctopic, ".png")
-    bars
-    ggsave(fname,
-           width = ggw, height = ggh,
-           units = ggu, dpi = ggres)
+    save.gg(fname, bars)
   }
   
   setwd("..")

@@ -31,10 +31,7 @@ by.instructor = function(){
                        breaks = c(1:5),
                        labels = levels(sdata$X1),
                        limits = c(0,5))
-  barn
-  ggsave("ENG/instructor-ratings.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ENG/instructor-ratings.png", barn)
   # SPANISH
   bars = barn +
     labs(title = "Calificación general por instructor",
@@ -46,10 +43,7 @@ by.instructor = function(){
                        breaks = c(1:5),
                        labels = levels(sdata$X1),
                        limits = c(0,5))
-  bars
-  ggsave("ESP/calificación-instructor.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ESP/calificación-instructor.png", bars)
   setwd("..")
 }
 
@@ -64,17 +58,14 @@ materials = function(){
     theme(text = element_text(size = 17),
           axis.text.x = element_text(angle = 50,
                                      hjust = 1)) +
+    scale_x_discrete(name = "", drop = FALSE) +
     scale_y_continuous(name = "Percent of responses",
                        labels = scales::percent) +
-    scale_x_discrete(name = "", drop = FALSE) +
     labs(title = "Quality of Instruction Materials",
          subtitle = paste("from OSHA trainings",
                           t.key[1], "-",
                           t.key[length(t.key)]))
-  barn
-  ggsave("ENG/materials.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ENG/materials.png", barn)
   # SPANISH
   bars = barn +
     labs(title = "Calidad de los materiales de instrucción",
@@ -83,9 +74,40 @@ materials = function(){
                           t.key[length(t.key)])) +
     scale_y_continuous(name = "Porcentaje de respuestas",
                        labels = scales::percent)
-  bars
-  ggsave("ESP/materiales.png",
-         width = ggw, height = ggh,
-         units = ggu, dpi = ggres)
+  save.gg("ESP/materiales.png", bars)
+  setwd("..")
+}
+
+application = function(){
+  setwd("output")
+  
+  # make graph
+  # ENGLISH
+  barn = ggplot(sdata, aes(x=X5)) +
+    geom_bar(aes(y = (..count..)/sum(..count..)),
+             fill = 10) +
+    theme(text = element_text(size = 17),
+          axis.text.x = element_text(angle = 50,
+                                     hjust = 1)) +
+    scale_x_discrete(name = "How much of the content from this training will you apply?",
+                     drop = FALSE) +
+    scale_y_continuous(name = "Percent of responses",
+                       labels = scales::percent) +
+    labs(title = "Application of Content",
+         subtitle = paste("from OSHA trainings",
+                          t.key[1], "-",
+                          t.key[length(t.key)]))
+  save.gg("ENG/applications.png", barn)
+  # SPANISH
+  bars = barn +
+    labs(title = "Aplicación de conocimientos",
+         subtitle = paste("de entrenamientos de OSHA",
+                          t.key[1], "-",
+                          t.key[length(t.key)])) +
+    scale_y_continuous(name = "Porcentaje de respuestas",
+                       labels = scales::percent) +
+    scale_x_discrete(name = "¿Cuantos conocimientos del entrenamiento aplicará usted?",
+                     drop = FALSE)
+  save.gg("ESP/aplicación.png", bars)
   setwd("..")
 }
