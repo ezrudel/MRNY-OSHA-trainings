@@ -7,6 +7,7 @@ setwd("C:/Users/ezra/Desktop/R-workspace/MRNY-OSHA-trainings")
 library(dplyr)
 library(readr)
 library(stringr)
+library(ggplot2)
 
 # set up global variables:
 # question abbreviation key
@@ -61,6 +62,9 @@ ggh = 7
 ggu = "in"
 ggres = 300
 
+# ggplot defaults
+theme_set(theme_light())
+
 # run code
 run = function(){
   # load data into df
@@ -69,6 +73,7 @@ run = function(){
   
   source("src/survey.R", encoding = 'UTF-8')
   by.instructor()
+  materials()
   
   source("src/pre_post.R", encoding = 'UTF-8')
   vs.pre_post()

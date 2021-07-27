@@ -35,10 +35,10 @@ vs.pre_post = function(){
   barn = ggplot(means,
                aes(x=start_date,y=avg,fill=test)) +
     geom_col(position = "dodge") +
+    ylim(0,10) +
     theme(text = element_text(size = 17),
           axis.text.x = element_text(angle = 45,
                                      hjust = 1)) +
-    ylim(0,10) +
     labs(title = "Pre- and Post-Test Results",
          subtitle = "from 2020-2021 OSHA trainings") +
     xlab("Training Start Date") +
@@ -63,6 +63,7 @@ vs.pre_post = function(){
   boxn = ggplot(scores, aes(x=start_date, y=score,
                            fill=test)) +
     geom_boxplot(outlier.size = 1.5) +
+    ylim(0,10) +
     stat_summary(fun = mean, geom = "point",
                  shape = 18, color = "yellow",
                  size = 3,
@@ -71,7 +72,6 @@ vs.pre_post = function(){
     theme(text = element_text(size = 17),
           axis.text.x = element_text(angle = 45,
                                      hjust = 1)) +
-    ylim(0,10) +
     labs(title = "Pre- and Post-Test Results",
          subtitle = "from 2020-2021 OSHA trainings") +
     xlab("Training Start Date") +

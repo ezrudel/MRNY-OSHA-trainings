@@ -78,6 +78,7 @@ by.question = function(){
     qnames = c.key %>% select(-Test, -Topic) %>%
       as.character() %>% str_wrap(width = 22,
                                   indent = 3)
+    # print(qnames)
     qnames = factor(qnames, qnames)
     
     # calculate % correct for each ?
