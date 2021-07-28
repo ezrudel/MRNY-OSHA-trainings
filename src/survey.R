@@ -58,22 +58,25 @@ materials = function(){
     theme(text = element_text(size = 17),
           axis.text.x = element_text(angle = 50,
                                      hjust = 1)) +
-    scale_x_discrete(name = "", drop = FALSE) +
+    scale_x_discrete(name = "How would you rate the instruction materials?",
+                     drop = FALSE) +
     scale_y_continuous(name = "Percent of responses",
                        labels = scales::percent) +
-    labs(title = "Quality of Instruction Materials",
+    labs(title = "Instruction Materials",
          subtitle = paste("from OSHA trainings",
                           t.key[1], "-",
                           t.key[length(t.key)]))
   save.gg("ENG/materials.png", barn)
   # SPANISH
   bars = barn +
-    labs(title = "Calidad de los materiales de instrucción",
+    labs(title = "Materiales de instrucción",
          subtitle = paste("de entrenamientos de OSHA",
                           t.key[1], "-",
                           t.key[length(t.key)])) +
     scale_y_continuous(name = "Porcentaje de respuestas",
-                       labels = scales::percent)
+                       labels = scales::percent) +
+    scale_x_discrete(name = "¿Comó se calificará los materiales de instrucción?",
+                     drop = FALSE)
   save.gg("ESP/materiales.png", bars)
   setwd("..")
 }

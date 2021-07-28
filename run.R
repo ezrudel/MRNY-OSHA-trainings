@@ -76,6 +76,7 @@ run = function(){
   source("src/survey.R", encoding = 'UTF-8')
   by.instructor()
   materials()
+  application()
   
   source("src/pre_post.R", encoding = 'UTF-8')
   vs.pre_post()

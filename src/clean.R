@@ -80,20 +80,28 @@ clean.survey = function(df,tr){
                                    "Satisfactorio",
                                    "Muy Bueno",
                                    "Excelente"))
+  
+  # given a single string from column X5,
+  # returns the corresponding shortened value
   interpret.X5 = function(x){
-    if(grepl("algunos", x)){
+    if(x == "No aplicaré los conocimientos"){
+      return("Ningunos")
+    } else if(x == "Aplicaré algunos conocimientos"){
       return("Algunos")
-    } else if(grepl("la gran parte", x)){
+    } else if(x == "Aplicaré la gran parte de los conocimientos"){
       return("Muchos")
-    } else if(grepl("todos", x)){
+    } else if(x == "Aplicaré todos los conocimientos"){
       return("Todos")
     } else {
-      return("Ningunos")
+      return(NA)
     }
   }
   df$X5 = df$X5 %>% as.character()
   df$X5 = df$X5 %>% lapply(interpret.X5) %>% unlist()
-  df$X5 = df$X5 %>% as.factor()
+  df$X5 = df$X5 %>% factor(levels = c("Ningunos",
+                                      "Algunos",
+                                      "Muchos",
+                                      "Todos"))
   
   # add date column
   df = data.frame(start_date = t.key[tr], df)
