@@ -39,10 +39,11 @@ vignettes/*.pdf
 .Renviron
 
 # raw data
-data/raw/*
+input/*
 
 # output (for now)
 output/*
 
-# scrap code
+# scrap and test code
 src/scrap.R
+src/test.R

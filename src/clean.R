@@ -1,10 +1,6 @@
-# cleans the output from Google Forms into a dataframe
-# with the names of all participants, which training
-# they took, and which questions they got right
+# program to clean output of Google Forms CSV download
+# into readable dataframe
 
-#load packages
-library(dplyr)
-library(stringr)
 
 clean.test = function(df,tr,te){
   # check for bad data

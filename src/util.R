@@ -1,10 +1,5 @@
 # utility functions for all parts of program
 
-# load packages
-library(ggplot2)
-library(dplyr)
-library(stringr)
-
 # saves graph using global settings
 save.gg = function(fname, graph){
   ggsave(remove.accents(fname), plot = graph,

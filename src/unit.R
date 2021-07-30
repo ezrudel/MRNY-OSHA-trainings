@@ -1,12 +1,5 @@
 # program to analyze unit test data
 
-# output: a graph for each unit test, showing the
-# percent of participants across all trainings that
-# got each question right
-
-library(dplyr)
-library(ggplot2)
-
 # create graph comparing unit tests
 by.test = function(){
   setwd("output")
@@ -93,7 +86,7 @@ by.question = function(){
       ylim(0,100) +
       labs(title = "Unit Test Results by Question",
            subtitle = paste("Topic:", ctopic,
-                            "   Date Range:",
+                            "\nDates:",
                             t.key[1], "-",
                             t.key[length(t.key)])) +
       xlab("Question") +
@@ -104,7 +97,7 @@ by.question = function(){
     bars = barn +
       labs(title = "Evaluaciones de la unidad por pregunta",
            subtitle = paste("Tema:", ctopic,
-                            "   Fechas:",
+                            "\nFechas:",
                             t.key[1], "-",
                             t.key[length(t.key)])) +
       xlab("Pregunta") +

@@ -1,10 +1,5 @@
 # program to analyze survey data
 
-# import packages
-library(dplyr)
-library(ggplot2)
-library(stringr)
-
 # compares instructors via the average overall
 # rating of their trainings
 by.instructor = function(){

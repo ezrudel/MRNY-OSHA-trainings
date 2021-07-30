@@ -1,12 +1,5 @@
 # program to analyze pre- and post-test data
 
-# output: graphs showing average scores and score
-# distributions for pre- and post-tests for each
-# training
-
-library(dplyr)
-library(ggplot2)
-
 # create graphs comparing pre- and post-test data
 vs.pre_post = function(){
   setwd("output")

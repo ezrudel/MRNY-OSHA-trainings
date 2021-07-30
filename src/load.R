@@ -1,13 +1,8 @@
 # program to read in all data into a single dataframe
 
-#load packages
-library(readr)
-library(dplyr)
-library(stringr)
-
 load.data = function(){
   source("src/clean.R", encoding = 'UTF-8')
-  setwd("data/raw")
+  setwd("input")
   for(i in 1:length(dirs)){
     tests = list.dirs(path = dirs[i])
     for(j in 2:length(tests)){
@@ -45,12 +40,15 @@ load.data = function(){
     }
   }
   
-  # # add date column
-  # tdata = tdata %>%
-  #   mutate(start_date = t.key[training]) %>%
-  #   select(-training)
-  # tdata = tdata[c(13,1:12)]
-  
-  setwd("../..")
+  setwd("..")
   return(tdata)
+}
+
+# write suggestion data into a CSV
+suggestions.out = function(){
+  sugs = sdata %>%
+    transmute(start_date = start_date,
+              instructor = Instructor,
+              suggestion = X7)
+  write_csv(sugs, "output/suggestions.csv")
 }

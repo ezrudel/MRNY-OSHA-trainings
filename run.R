@@ -1,10 +1,13 @@
-#program to run all code in project
+# program to run all code in project
 
-#set directory
+# set directory
 setwd("C:/Users/ezra/Desktop/R-workspace/MRNY-OSHA-trainings")
 
-#load packages
-library(dplyr)
+# install packages
+# install.packages("dplyr", "readr", "stringr", "ggplot2")
+
+# load packages
+suppressMessages(library(dplyr))
 library(readr)
 library(stringr)
 library(ggplot2)
@@ -13,7 +16,7 @@ source("src/util.R", encoding = "UTF-8")
 
 # set up global variables:
 # question abbreviation key
-q.key = read.csv("data/question-key.csv",
+q.key = read.csv("keys/questions.csv",
                  encoding="UTF-8")
 colnames(q.key)[1] = "Test"
 q.key$Topic = factor(q.key$Topic, levels = q.key$Topic)
@@ -23,13 +26,13 @@ bad_data = matrix(nrow = 0, ncol = 2)
 colnames(bad_data) = c("training", "test")
 
 # directory list
-setwd("data/raw")
+setwd("input")
 dirs = list.dirs(recursive = FALSE)
-setwd("../..")
+setwd("..")
 
 # training key
 t.key = dirs %>% str_sub(3,12) %>%
-  as.Date(format = "%Y_%m_%d") %>% format("%b %d")
+  as.Date(format = "%Y_%m_%d") %>% format("%b %d %Y")
 t.key = factor(t.key, levels = t.key)
 
 # test data
@@ -72,6 +75,7 @@ run = function(){
   # load data into df
   source("src/load.R", encoding = 'UTF-8')
   load.data()
+  suggestions.out()
   
   source("src/survey.R", encoding = 'UTF-8')
   by.instructor()
