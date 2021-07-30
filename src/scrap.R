@@ -55,3 +55,26 @@ ggsave("ESP/calificacion-instructor.png",
        width = ggw, height = ggh,
        units = ggu, dpi = ggres)
 setwd("..")
+
+
+# word cloud
+suggestions = function(){
+  setwd("output")
+  
+  # separate words
+  words = sdata$X7 %>%
+    str_split(" ") %>% unlist() %>%
+    as.data.frame()
+  colnames(words) = c("word")
+  
+  # calculate frequencies
+  freq = words %>% count(vars = word)
+  
+  # make word cloud
+  cloud = ggplot(freq, aes(label = vars,
+                           size = n)) +
+    geom_text_wordcloud()
+  save.gg("ESP/sugerencias.png", cloud)
+  
+  setwd("..")
+}

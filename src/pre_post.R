@@ -28,7 +28,8 @@ vs.pre_post = function(){
   
   # avg each test/training
   means = scores %>% group_by(start_date,test) %>%
-    summarise(avg = mean(score))
+    summarise(avg = mean(score)) %>%
+    suppressMessages()
 
   # make bar graph
   # ENGLISH
