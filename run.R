@@ -23,7 +23,8 @@ q.key$Topic = factor(q.key$Topic, levels = q.key$Topic)
 
 # bad data log
 bad_data = matrix(nrow = 0, ncol = 2)
-colnames(bad_data) = c("training", "test")
+colnames(bad_data) = c("Training",
+                       "Test")
 
 # directory list
 setwd("input")
@@ -70,6 +71,21 @@ ggres = 300
 # ggplot defaults
 theme_set(theme_light())
 
+# factor levels for surveys
+rateLevels = c("Bajo",
+               "Suficiente",
+               "Satisfactorio",
+               "Muy Bueno",
+               "Excelente")
+rateLevelsEN = rateLevels %>%
+  lapply(to.english) %>% unlist()
+appLevels = c("Ningunos",
+              "Algunos",
+              "Muchos",
+              "Todos")
+appLevelsEN = appLevels %>%
+  lapply(to.english) %>% unlist()
+
 # run code
 run = function(){
   # load data into df
@@ -77,7 +93,10 @@ run = function(){
   load.data()
   suggestions.out()
   
+  convert.bad_data()
+  
   source("src/survey.R", encoding = 'UTF-8')
+  english.copy()
   by.instructor()
   materials()
   application()

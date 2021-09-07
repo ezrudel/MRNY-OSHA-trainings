@@ -66,16 +66,9 @@ clean.survey = function(df,tr){
   
   # reformat factor columns
   df$Instructor = as.factor(df$Instructor)
-  df$X1 = factor(df$X1, levels = c("Bajo",
-                                   "Suficiente",
-                                   "Satisfactorio",
-                                   "Muy Bueno",
-                                   "Exelente"))
-  df$X3 = factor(df$X3, levels = c("Bajo",
-                                   "Suficiente",
-                                   "Satisfactorio",
-                                   "Muy Bueno",
-                                   "Excelente"))
+  df$X1 = df$X1 %>% str_replace("Exelente", "Excelente")
+  df$X1 = factor(df$X1, levels = rateLevels)
+  df$X3 = factor(df$X3, levels = rateLevels)
   
   # given a single string from column X5,
   # returns the corresponding shortened value
@@ -94,10 +87,7 @@ clean.survey = function(df,tr){
   }
   df$X5 = df$X5 %>% as.character()
   df$X5 = df$X5 %>% lapply(interpret.X5) %>% unlist()
-  df$X5 = df$X5 %>% factor(levels = c("Ningunos",
-                                      "Algunos",
-                                      "Muchos",
-                                      "Todos"))
+  df$X5 = df$X5 %>% factor(levels = appLevels)
   
   # add date column
   df = data.frame(start_date = t.key[tr], df)

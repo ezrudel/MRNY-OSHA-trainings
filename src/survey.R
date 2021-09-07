@@ -1,17 +1,28 @@
 # program to analyze survey data
 
+# creates copy of sdata in English
+english.copy = function(){
+  sdataEN <<- data.frame(sdata)
+  sdataEN$X1 <<- sdataEN$X1 %>% lapply(to.english) %>%
+    factor(levels = rateLevelsEN)
+  sdataEN$X3 <<- sdataEN$X3 %>% lapply(to.english) %>%
+    factor(levels = rateLevelsEN)
+  sdataEN$X5 <<- sdataEN$X5 %>% lapply(to.english) %>%
+    factor(levels = appLevelsEN)
+}
+
 # compares instructors via the average overall
 # rating of their trainings
 by.instructor = function(){
   setwd("output")
   
+  # ENGLISH
   # get avg ratings for each instructor
-  means = sdata %>% group_by(Instructor) %>%
+  meansEN = sdataEN %>% group_by(Instructor) %>%
     summarise(avg = mean(as.numeric(X1)))
   
   # make graph
-  # ENGLISH
-  barn = ggplot(means,
+  barn = ggplot(meansEN,
                aes(x=Instructor,y=avg)) +
     geom_col(fill = 10) +
     labs(title = "Overall Ratings by Instructor",
@@ -24,11 +35,22 @@ by.instructor = function(){
                                      hjust = 1)) +
     scale_y_continuous(name = "Average Overall Rating",
                        breaks = c(1:5),
-                       labels = levels(sdata$X1),
+                       labels = levels(sdataEN$X1),
                        limits = c(0,5))
   save.gg("ENG/instructor-ratings.png", barn)
+  
   # SPANISH
-  bars = barn +
+  # get avg ratings for each instructor
+  means = sdata %>% group_by(Instructor) %>%
+    summarise(avg = mean(as.numeric(X1)))
+  
+  # make graph
+  bars = ggplot(means,
+                aes(x=Instructor,y=avg)) +
+    geom_col(fill = 10) +
+    theme(text = element_text(size = 17),
+          axis.text.x = element_text(angle = 50,
+                                     hjust = 1)) +
     labs(title = "Calificación general por instructor",
          subtitle = paste("de entrenamientos de OSHA",
                           t.key[1], "-",
@@ -47,7 +69,7 @@ materials = function(){
   
   # make graph
   # ENGLISH
-  barn = ggplot(sdata, aes(x=X3)) +
+  barn = ggplot(sdataEN, aes(x=X3)) +
     geom_bar(aes(y = (..count..)/sum(..count..)),
              fill = 10) +
     theme(text = element_text(size = 17),
@@ -62,8 +84,14 @@ materials = function(){
                           t.key[1], "-",
                           t.key[length(t.key)]))
   save.gg("ENG/materials.png", barn)
+  
   # SPANISH
-  bars = barn +
+  bars = ggplot(sdata, aes(x=X3)) +
+    geom_bar(aes(y = (..count..)/sum(..count..)),
+             fill = 10) +
+    theme(text = element_text(size = 17),
+          axis.text.x = element_text(angle = 50,
+                                     hjust = 1)) +
     labs(title = "Materiales de instrucción",
          subtitle = paste("de entrenamientos de OSHA",
                           t.key[1], "-",
@@ -81,7 +109,7 @@ application = function(){
   
   # make graph
   # ENGLISH
-  barn = ggplot(sdata, aes(x=X5)) +
+  barn = ggplot(sdataEN, aes(x=X5)) +
     geom_bar(aes(y = (..count..)/sum(..count..)),
              fill = 10) +
     theme(text = element_text(size = 17),
@@ -97,7 +125,12 @@ application = function(){
                           t.key[length(t.key)]))
   save.gg("ENG/applications.png", barn)
   # SPANISH
-  bars = barn +
+  bars = ggplot(sdata, aes(x=X5)) +
+    geom_bar(aes(y = (..count..)/sum(..count..)),
+             fill = 10) +
+    theme(text = element_text(size = 17),
+          axis.text.x = element_text(angle = 50,
+                                     hjust = 1)) +
     labs(title = "Aplicación de conocimientos",
          subtitle = paste("de entrenamientos de OSHA",
                           t.key[1], "-",

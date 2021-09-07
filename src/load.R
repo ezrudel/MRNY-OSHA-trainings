@@ -31,7 +31,7 @@ load.data = function(){
       
       # check for bad data and add to df
       if(nrow(temp) == 0){
-        bad_data <<- bad_data %>% rbind(c(dirs[i], n))
+        bad_data <<- bad_data %>% rbind(c(t.key[i], n))
       } else if(n == 18){ # survey
         sdata <<- sdata %>% bind_rows(temp)
       } else { # test

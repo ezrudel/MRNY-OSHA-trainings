@@ -26,3 +26,26 @@ remove.accents = function(s){
     gsub("¡", "", .)
   return(s)
 }
+
+# converts bad_data matrix to readable df
+convert.bad_data = function(){
+  bad_data <<- bad_data %>% data.frame() %>%
+    transmute(Training = t.key[Training],
+              Test = Test)
+}
+
+# translates necessary words from Spanish to English
+to.english = function(sp){
+  dict = rbind(c("Todos", "All"),
+               c("Muchos", "Most"),
+               c("Algunos", "Some"),
+               c("Ningunos", "None"),
+               c("Excelente", "Excellent"),
+               c("Muy Bueno", "Very Good"),
+               c("Satisfactorio", "Satisfactory"),
+               c("Suficiente", "Fair"),
+               c("Bajo", "Poor")) %>%
+    data.frame()
+  colnames(dict) = c("Spanish", "English")
+  return(dict$English[which(dict$Spanish == sp)])
+}
