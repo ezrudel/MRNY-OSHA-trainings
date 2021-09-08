@@ -4,13 +4,25 @@
 setwd("C:/Users/ezra/Desktop/R-workspace/MRNY-OSHA-trainings")
 
 # install packages
-# install.packages("dplyr", "readr", "stringr", "ggplot2")
+packages = c("ggplot2", "dplyr", "readr", "stringr")
+new.packages = packages[!(packages %in%
+                            installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
 
 # load packages
 suppressMessages(library(dplyr))
 library(readr)
 library(stringr)
 library(ggplot2)
+
+# unloads all loaded packages
+unload.packages = function(){
+  for(p in packages) {
+    print(paste("package", p, sep = ":"))
+    detach(paste("package", p, sep = ":"), unload = TRUE)
+  }
+}
+unload.packages()
 
 source("src/util.R", encoding = "UTF-8")
 
@@ -100,7 +112,6 @@ run = function(){
   by.instructor()
   materials()
   application()
-  
   
   source("src/pre_post.R", encoding = 'UTF-8')
   vs.pre_post()
