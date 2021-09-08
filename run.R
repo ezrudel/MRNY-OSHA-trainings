@@ -6,11 +6,13 @@ setwd("C:/Users/ezra/Desktop/R-workspace/MRNY-OSHA-trainings")
 source("src/util.R", encoding = "UTF-8")
 
 # necessary packages:
-packages = c("ggplot2", "dplyr", "readr", "stringr")
+packages = c("ggplot2", "dplyr", "readr", "installr", "stringr")
 
 instackages()
 
 load.packages()
+
+updateR(fast = TRUE)
 
 # set up global variables:
 # question abbreviation key
