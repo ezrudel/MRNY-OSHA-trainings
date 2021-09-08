@@ -3,28 +3,14 @@
 # set directory
 setwd("C:/Users/ezra/Desktop/R-workspace/MRNY-OSHA-trainings")
 
-# install packages
-packages = c("ggplot2", "dplyr", "readr", "stringr")
-new.packages = packages[!(packages %in%
-                            installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages)
-
-# load packages
-suppressMessages(library(dplyr))
-library(readr)
-library(stringr)
-library(ggplot2)
-
-# unloads all loaded packages
-unload.packages = function(){
-  for(p in packages) {
-    print(paste("package", p, sep = ":"))
-    detach(paste("package", p, sep = ":"), unload = TRUE)
-  }
-}
-unload.packages()
-
 source("src/util.R", encoding = "UTF-8")
+
+# necessary packages:
+packages = c("ggplot2", "dplyr", "readr", "stringr")
+
+instackages()
+
+load.packages()
 
 # set up global variables:
 # question abbreviation key
@@ -122,3 +108,5 @@ run = function(){
   
 }
 run()
+
+unload.packages()

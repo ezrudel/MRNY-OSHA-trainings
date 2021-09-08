@@ -49,3 +49,34 @@ to.english = function(sp){
   colnames(dict) = c("Spanish", "English")
   return(dict$English[which(dict$Spanish == sp)])
 }
+
+# installs all necessary packages
+instackages = function(){
+  new.packages = packages[!(packages %in%
+                              installed.packages()[,"Package"])]
+  if(length(new.packages)){
+    install.packages(new.packages)
+  }
+}
+
+# uninstalls all packages installed during program
+# for testing purposes only
+uninstackages = function(){
+  remove.packages(packages)
+}
+
+# loads all necessary packages
+load.packages = function(){
+  for(p in packages){
+    suppressMessages(require(p, character.only = TRUE))
+  }
+}
+
+# unloads all necessary packages
+unload.packages = function(){
+  for(p in packages) {
+    detach(paste("package", p, sep = ":"),
+           unload = TRUE,
+           character.only = TRUE)
+  }
+}
