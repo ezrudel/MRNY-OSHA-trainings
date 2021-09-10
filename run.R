@@ -22,6 +22,9 @@ if(length(arg) == 0) {
   setwd(arg[1])
 }
 
+# for testing
+# setwd("C:/Users/ezra/Desktop/R-workspace/MRNY-OSHA-trainings")
+
 source("src/util.R", encoding = "UTF-8")
 
 # necessary packages:
@@ -50,8 +53,13 @@ welcome = paste("\nWelcome to the OSHA Trainings Analyzer!",
   str_wrap(width = w)
 
 # question abbreviation key
-q.key = read.csv("keys/questions.csv",
-                 encoding="UTF-8")
+if (.Platform['OS.type'] == "windows"){
+  q.key = read.csv("keys/questions.csv",
+                   encoding = "UTF-8")
+} else {
+  q.key = read.csv("keys/questions.csv",
+                   encoding = "macintosh")
+}
 colnames(q.key)[1] = "Test"
 q.key$Topic = factor(q.key$Topic, levels = q.key$Topic)
 

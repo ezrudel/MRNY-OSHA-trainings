@@ -24,9 +24,15 @@ load.data = function(){
                            pattern = "csv")
       # read in file,
       # ignore warnings about incomplete files
-      temp = read.csv(file.path(tests[j],results),
-                      encoding = "UTF-8") %>%
-        suppressWarnings()
+      if (.Platform['OS.type'] == "windows"){
+        temp = read.csv(file.path(tests[j],results),
+                        encoding = "UTF-8") %>%
+          suppressWarnings()
+      } else {
+        temp = read.csv(file.path(tests[j],results),
+                        encoding = "macintosh") %>%
+          suppressWarnings()
+      }
       
       # extract number from filename:
       n = tests[j] %>% str_sub(3) %>%
