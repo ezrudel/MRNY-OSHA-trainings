@@ -31,7 +31,7 @@ load.data = function(){
       } else {
         temp = read.csv(file.path(tests[j],results),
                         encoding = "UTF-8",
-                        fileEncoding = "macintosh") %>%
+                        fileEncoding = "UTF-8") %>%
           suppressWarnings()
       }
       
