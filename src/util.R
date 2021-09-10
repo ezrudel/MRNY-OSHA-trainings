@@ -80,7 +80,8 @@ instackages = function(){
   new.packages = packages[!(packages %in%
                               installed.packages()[,"Package"])]
   if(length(new.packages)){
-    install.packages(new.packages)
+    install.packages(new.packages,
+                     repos = "https://cloud.r-project.org")
   }
 }
 
