@@ -100,3 +100,20 @@ opendir <- function(dir = getwd()){
     system(paste(Sys.getenv("R_BROWSER"), dir))
   }
 }
+
+# verify directory setup and create folders if necessary
+dir.setup = function(){
+  subdirs = list.dirs(recursive = TRUE)
+  if(!("./input" %in% subdirs)){
+    stop("Input folder missing!")
+  }
+  if(!("./output" %in% subdirs)){
+    dir.create("output")
+  }
+  if(!("./output/ENG" %in% subdirs)){
+    dir.create("output/ENG")
+  }
+  if(!("./output/ESP" %in% subdirs)){
+    dir.create("output/ESP")
+  }
+}

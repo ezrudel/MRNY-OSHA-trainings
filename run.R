@@ -20,6 +20,9 @@ load.packages()
 cat("\n")
 updateR(fast = TRUE)
 
+# set up directories
+dir.setup()
+
 # set up global variables:
 
 # width for text output wrapping
