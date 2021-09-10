@@ -1,3 +1,17 @@
+# ------------------------------------
+# Project: OSHA Training Analyzer
+# 
+# Script: load.R
+# 
+# Author: Ezra Rudel
+# 
+# Date Created: 2021-09-10
+# 
+# Copyright (c) Ezra Rudel 2021
+# Email: ezra@rudel.net
+# 
+# ------------------------------------
+
 # program to read in all data into a single dataframe
 
 load.data = function(){

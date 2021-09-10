@@ -1,3 +1,17 @@
+# ------------------------------------
+# Project: OSHA Training Analyzer
+# 
+# Script: survey.R
+# 
+# Author: Ezra Rudel
+# 
+# Date Created: 2021-09-10
+# 
+# Copyright (c) Ezra Rudel 2021
+# Email: ezra@rudel.net
+# 
+# ------------------------------------
+
 # program to analyze survey data
 
 # creates copy of sdata in English
@@ -64,6 +78,7 @@ by.instructor = function(){
   setwd("..")
 }
 
+# graph distribution of ratings of instruction materials
 materials = function(){
   setwd("output")
   
@@ -104,6 +119,7 @@ materials = function(){
   setwd("..")
 }
 
+# graph distribution of ratings of usefulness of training
 application = function(){
   setwd("output")
   

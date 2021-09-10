@@ -1,6 +1,20 @@
+# ------------------------------------
+# Project: OSHA Training Analyzer
+# 
+# Script: run.R
+# 
+# Author: Ezra Rudel
+# 
+# Date Created: 2021-09-10
+# 
+# Copyright (c) Ezra Rudel 2021
+# Email: ezra@rudel.net
+# 
+# ------------------------------------
+
 # program to run all code in project
 
-# set directory
+# set working directory
 arg = commandArgs(trailingOnly = TRUE)
 if(length(arg) == 0) {
   stop("Please supply arguments: working directory")

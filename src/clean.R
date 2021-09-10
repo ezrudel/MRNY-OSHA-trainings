@@ -1,7 +1,21 @@
+# ------------------------------------
+# Project: OSHA Training Analyzer
+# 
+# Script: clean.R
+# 
+# Author: Ezra Rudel
+# 
+# Date Created: 2021-09-10
+# 
+# Copyright (c) Ezra Rudel 2021
+# Email: ezra@rudel.net
+# 
+# ------------------------------------
+
 # program to clean output of Google Forms CSV download
 # into readable dataframe
 
-
+# for test data
 clean.test = function(df,tr,te){
   # check for bad data
   if(nrow(df) == 0){
@@ -52,6 +66,7 @@ clean.test = function(df,tr,te){
   return(df)
 }
 
+# for survey data
 clean.survey = function(df,tr){
   #check for bad data
   if(nrow(df) == 0){

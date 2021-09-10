@@ -1,3 +1,17 @@
+# ------------------------------------
+# Project: OSHA Training Analyzer
+# 
+# Script: pre_post.R
+# 
+# Author: Ezra Rudel
+# 
+# Date Created: 2021-09-10
+# 
+# Copyright (c) Ezra Rudel 2021
+# Email: ezra@rudel.net
+# 
+# ------------------------------------
+
 # program to analyze pre- and post-test data
 
 # create graphs comparing pre- and post-test data
