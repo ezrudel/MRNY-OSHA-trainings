@@ -58,7 +58,8 @@ if (.Platform['OS.type'] == "windows"){
                    encoding = "UTF-8")
 } else {
   q.key = read.csv("keys/questions.csv",
-                   encoding = "macintosh")
+                   encoding = "UTF-8",
+                   fileEncoding = "macintosh")
 }
 colnames(q.key)[1] = "Test"
 q.key$Topic = factor(q.key$Topic, levels = q.key$Topic)
