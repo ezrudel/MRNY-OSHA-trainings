@@ -30,8 +30,19 @@ remove.accents = function(s){
 # converts bad_data matrix to readable df
 convert.bad_data = function(){
   bad_data <<- bad_data %>% data.frame() %>%
-    transmute(Training = t.key[Training],
-              Test = Test)
+    transmute("Training Start Date:" = t.key[Training],
+              "Test Number:" = Test)
+}
+
+# prints bad_data log
+print.bad_data = function(){
+  message = paste("The following datasets could not be processed",
+                  "because the forms that generated them were empty",
+                  "or incorrectly formatted:") %>%
+    str_wrap(width = w)
+  cat("\n", message, "\n\n", sep = "")
+  print.data.frame(bad_data, right = TRUE, row.names = FALSE)
+  cat("\n")
 }
 
 # translates necessary words from Spanish to English
@@ -75,8 +86,17 @@ load.packages = function(){
 # unloads all necessary packages
 unload.packages = function(){
   for(p in packages) {
-    detach(paste("package", p, sep = ":"),
+    detach(paste0("package:", p),
            unload = TRUE,
            character.only = TRUE)
+  }
+}
+
+# opens file explorer in given directory
+opendir <- function(dir = getwd()){
+  if (.Platform['OS.type'] == "windows"){
+    shell.exec(dir)
+  } else {
+    system(paste(Sys.getenv("R_BROWSER"), dir))
   }
 }

@@ -1,7 +1,12 @@
 # program to run all code in project
 
 # set directory
-setwd("C:/Users/ezra/Desktop/R-workspace/MRNY-OSHA-trainings")
+arg = commandArgs(trailingOnly = TRUE)
+if(length(arg) == 0) {
+  stop("Please supply arguments: working directory")
+} else {
+  setwd(arg[1])
+}
 
 source("src/util.R", encoding = "UTF-8")
 
@@ -12,9 +17,21 @@ instackages()
 
 load.packages()
 
+cat("\n")
 updateR(fast = TRUE)
 
 # set up global variables:
+
+# width for text output wrapping
+w = 60
+
+# welcome text
+welcome = paste("\nWelcome to the OSHA Trainings Analyzer!",
+                "This program was designed for Make the Road NY by",
+                "Ezra Rudel. If you experience any problems with the",
+                "software, please contact me at ezra@rudel.net.\n") %>%
+  str_wrap(width = w)
+
 # question abbreviation key
 q.key = read.csv("keys/questions.csv",
                  encoding="UTF-8")
@@ -88,6 +105,11 @@ appLevelsEN = appLevels %>%
 
 # run code
 run = function(){
+  # intro
+  cat("\n", welcome, "\n", sep = "")
+  cat("\nYou have set the working directory to:\n",
+      getwd(), "\n", sep = "")
+  
   # load data into df
   source("src/load.R", encoding = 'UTF-8')
   load.data()
@@ -107,6 +129,10 @@ run = function(){
   source("src/unit.R", encoding = 'UTF-8')
   by.question()
   by.test()
+  
+  print.bad_data()
+  
+  opendir(dir = "output")
   
 }
 run()

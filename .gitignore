@@ -41,9 +41,14 @@ vignettes/*.pdf
 # raw data
 input/*
 
-# output (for now)
-output/*
+# output
+output/ENG/*
+output/ESP/*
+output/suggestions.csv
 
 # scrap and test code
 src/scrap.R
 src/test.R
+
+# batch file
+start.bat
